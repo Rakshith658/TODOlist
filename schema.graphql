@@ -1,0 +1,48 @@
+type Query{
+    mytasklist: [TaskList]!
+}
+
+type Mutation{
+    singup(data:Singup):AuthUser!
+    singin(data:Singin):AuthUser!
+}
+
+input Singup{
+    name:String!
+    email:String!
+    password:String!
+    avatar:String
+}
+
+input Singin{
+    email:String!
+    password:String!
+}
+
+type AuthUser{
+    user:User!
+    token:String!
+}
+
+type User{
+    id: ID!
+    name: String!
+    email: String!
+    avatar: String
+}
+
+type TaskList{
+    id: ID!
+    createdAt: String!
+    title: String!
+    progress: Float!
+    users:[User!]!
+    todos:[ToDo!]!
+}
+
+type ToDo{
+    id: ID!
+    content: String!
+    iscomplete: Boolean!
+    tasklist: TaskList!
+}
