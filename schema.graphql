@@ -1,10 +1,20 @@
 type Query{
     mytasklist: [TaskList]!
+    getTaskList(id:ID!):TaskList
 }
 
 type Mutation{
     singup(data:Singup):AuthUser!
     singin(data:Singin):AuthUser!
+
+    createTaskList(title:String!):TaskList!
+    updateTaskList(id:ID!,title:String!):TaskList!
+    deleteTaskList(id:ID!):TaskList!
+    inviteUser(tasklistid:ID!,userId:ID):TaskList
+
+    createToDo(tasklistid:ID!,content:String!):ToDo!
+    updateToDo(id:ID!,data:Todoinput):ToDo!
+    deleteTodo(id:ID!):ToDo!
 }
 
 input Singup{
@@ -19,16 +29,21 @@ input Singin{
     password:String!
 }
 
+input Todoinput{
+    content:String,
+    iscomplete:Boolean
+}
+
 type AuthUser{
     user:User!
     token:String!
 }
 
-type User{
-    id: ID!
-    name: String!
-    email: String!
-    avatar: String
+type User {
+    id:ID!
+    name:String!
+    email:String!
+    avatar:String
 }
 
 type TaskList{
